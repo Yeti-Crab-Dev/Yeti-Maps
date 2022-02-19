@@ -1,5 +1,5 @@
 import React from 'react';
-import Form from './Form'
+import { Form } from './Form.jsx'
 
 const App = () => {
     return (
@@ -13,4 +13,4 @@ const App = () => {
 
 //Plan: add Google map in this file with nested React Router
 
-export default CustomWorkout;
+export default App;
