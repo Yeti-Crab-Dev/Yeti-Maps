@@ -1,10 +1,10 @@
-
+const HtmlWebPackPlugin = require('html-webpack-plugin')
 const path = require('path');
 
 module.exports = {
 	mode : "development",
 	// ROLE: entry point for webpack
-    entry: path.resolve(__dirname, 'client/index.js'),
+    entry: path.resolve(__dirname, 'client/src/index.js'),
 	// ROLE: webpack begins executing (creates folder dist with file bundl.js)
     output: {
         path: path.resolve(__dirname, 'dist'),
@@ -26,6 +26,10 @@ module.exports = {
 				use: ['sass-loader']
 			},
         ],
-        exclude: /node_modules/,
-    }
+    },
+    plugins: [
+        new HtmlWebPackPlugin({
+            template: "./client/index.html"
+        })
+    ] 
 }

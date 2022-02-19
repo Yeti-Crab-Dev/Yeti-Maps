@@ -2,8 +2,10 @@
   "name": "scratch-project",
   "version": "1.0.0",
   "description": "Scratch Project by Michelle, Dee, Tony, Yurii, and Leonoor",
-  "main": "webpack.config.js",
+  "main": "index.js",
   "scripts": {
+    "start": "webpack server --hot --mode development ",
+    "build": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -36,8 +38,8 @@
     "css-loader": "^6.6.0",
     "nodemon": "^2.0.15",
     "style-loader": "^3.3.1",
-    "web-dev-server": "^3.0.22",
     "webpack": "^5.69.1",
-    "webpack-cli": "^4.9.2"
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.7.4"
   }
 }
