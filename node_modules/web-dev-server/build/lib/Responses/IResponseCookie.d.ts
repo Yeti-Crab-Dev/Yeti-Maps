@@ -1,0 +1,10 @@
+export interface IResponseCookie {
+    name: string;
+    value: string;
+    expires?: Date;
+    httpOnly?: boolean;
+    secure?: boolean;
+    domain?: string;
+    path?: string;
+    sameSite?: string;
+}

@@ -1,0 +1,7 @@
+export declare class Headers {
+    protected static mimes: any;
+    protected static extensions: any;
+    static GetMimeTypeByExtension(extension: string): string | null;
+    static GetExtensionByMimeType(mimeType: string): string | null;
+    protected static initMimeTypesAndExtensions(): void;
+}

@@ -1,0 +1,11 @@
+import { Request } from "./Request";
+import { Response } from "./Response";
+export declare class Event {
+    req: Request;
+    res: Response;
+    fullPath: string;
+    protected preventDefault: boolean;
+    constructor(req: Request, res: Response, fullPath: string);
+    PreventDefault(): Event;
+    IsPreventDefault(): boolean;
+}

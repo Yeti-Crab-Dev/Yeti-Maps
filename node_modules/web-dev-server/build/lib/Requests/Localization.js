@@ -1,0 +1,46 @@
+Object.defineProperty(exports, "__esModule", { value: true });
+var Static_1 = require("./Static");
+var Localization = /** @class */ (function () {
+    function Localization() {
+    }
+    Localization.prototype.SetLang = function (lang) {
+        this.lang = lang;
+        return this;
+    };
+    Localization.prototype.GetLang = function () {
+        if (this.lang == null)
+            this.initLangAndLocale();
+        return this.lang;
+    };
+    Localization.prototype.SetLocale = function (locale) {
+        this.locale = locale;
+        return this;
+    };
+    Localization.prototype.GetLocale = function () {
+        if (this.locale == null)
+            this.initLangAndLocale();
+        return this.locale;
+    };
+    /**
+     * Initialize language code and locale code from raw header `Http-Accept-Language`.
+     */
+    Localization.prototype.initLangAndLocale = function () {
+        var languagesAndLocales, langAndLocaleArr = [null, null];
+        var httpReq = this['http'], acceptLangs = httpReq.headers["accept-language"];
+        if (acceptLangs) {
+            languagesAndLocales = Static_1.Static.ParseHttpAcceptLang(acceptLangs);
+            if (languagesAndLocales.size > 0) {
+                langAndLocaleArr = languagesAndLocales.values().next().value;
+            }
+        }
+        if (!langAndLocaleArr[0])
+            langAndLocaleArr[0] = '';
+        if (langAndLocaleArr.length > 1 && !langAndLocaleArr[1])
+            langAndLocaleArr[1] = '';
+        this.lang = langAndLocaleArr[0];
+        this.locale = langAndLocaleArr[1];
+    };
+    return Localization;
+}());
+exports.Localization = Localization;
+//# sourceMappingURL=Localization.js.map

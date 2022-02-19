@@ -1,0 +1,12 @@
+/// <reference types="node" />
+import { Stats } from "fs";
+import { ErrorsHandler } from "./Error";
+import { Response } from "../Response";
+export declare class FilesHandler {
+    protected errorsHandler: ErrorsHandler;
+    constructor(errorsHandler: ErrorsHandler);
+    /**
+     * @summary Send a file:
+     */
+    HandleFile(fileFullPath: string, fileName: string, stats: Stats, res: Response): void;
+}

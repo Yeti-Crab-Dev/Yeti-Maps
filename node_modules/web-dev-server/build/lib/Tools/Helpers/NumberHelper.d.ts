@@ -1,0 +1,9 @@
+export declare class NumberHelper {
+    static FILE_SIZE: {
+        THRESH: number;
+        UNITS: string[];
+    };
+    static Padding(number: number, length?: number, char?: string): string;
+    static FormatFileSize(bytes: number): string;
+    static IsNumeric(val: any): boolean;
+}

@@ -1,0 +1,34 @@
+Object.defineProperty(exports, "__esModule", { value: true });
+var NumberHelper = /** @class */ (function () {
+    function NumberHelper() {
+    }
+    NumberHelper.Padding = function (number, length, char) {
+        if (length === void 0) { length = 2; }
+        if (char === void 0) { char = '0'; }
+        var result = number.toFixed(0);
+        for (var i = 2, l = length + 1; i < l; i++) // 2 => 2; 3 => 2,3; 4 => 2,3,4; ...
+            if (number < Math.pow(10, i - 1)) // 2 => 10; 3 => 10,100; 4 => 10,100,1000; ...
+                result = char + result;
+        return result;
+    };
+    NumberHelper.FormatFileSize = function (bytes) {
+        var u = -1, units = this.FILE_SIZE.UNITS, thresh = this.FILE_SIZE.THRESH;
+        if (Math.abs(bytes) < thresh)
+            return bytes + ' B';
+        do {
+            bytes /= thresh;
+            ++u;
+        } while (Math.abs(bytes) >= thresh && u < units.length - 1);
+        return bytes.toFixed(1) + ' ' + units[u];
+    };
+    NumberHelper.IsNumeric = function (val) {
+        return !isNaN(val);
+    };
+    NumberHelper.FILE_SIZE = {
+        THRESH: 1000,
+        UNITS: ['KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
+    };
+    return NumberHelper;
+}());
+exports.NumberHelper = NumberHelper;
+//# sourceMappingURL=NumberHelper.js.map

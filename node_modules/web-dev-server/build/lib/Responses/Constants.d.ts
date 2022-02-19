@@ -1,0 +1,10 @@
+export declare class Constants {
+    static readonly CODES: {
+        OK: number;
+        MOVED_PERMANENTLY: number;
+        SEE_OTHER: number;
+        NOT_FOUND: number;
+        INTERNAL_SERVER_ERROR: number;
+    };
+    static readonly HEADER_X_CPU_RAM = "X-Cpu-Ram";
+}

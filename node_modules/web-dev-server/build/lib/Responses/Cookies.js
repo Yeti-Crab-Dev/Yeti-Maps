@@ -1,0 +1,65 @@
+Object.defineProperty(exports, "__esModule", { value: true });
+var Cookies = /** @class */ (function () {
+    function Cookies() {
+        this.cookies = new Map();
+        this.cookiesToDelete = new Map();
+    }
+    Cookies.prototype.SetCookie = function (cfg) {
+        this.cookies.set(cfg.name, cfg);
+        return this;
+    };
+    Cookies.prototype.HasCookie = function (name) {
+        return this.cookies.has(name);
+    };
+    Cookies.prototype.DeleteCookie = function (name) {
+        var cfg;
+        if (this.cookies.has(name)) {
+            cfg = this.cookies.get(name);
+            this.cookiesToDelete.set(name, cfg);
+        }
+        else if (!this.cookiesToDelete.has(name)) {
+            var expiresDate = new Date();
+            expiresDate.setTime(expiresDate.getTime() - (3600 * 1000));
+            cfg = {
+                name: name,
+                value: '',
+                expires: expiresDate,
+                path: '/'
+            };
+            this.cookiesToDelete.set(name, cfg);
+        }
+        this.cookies.delete(name);
+        return this;
+    };
+    Cookies.prototype.getCookiesHeaders = function () {
+        var result = [], nowDate = new Date();
+        this.cookies.forEach(function (cfg) {
+            var cookieVal, timeDiff, maxAge;
+            cookieVal = cfg.name + "=" + cfg.value.toString();
+            if (cfg.expires) {
+                cookieVal += "; expires=" + cfg.expires.toUTCString();
+                timeDiff = cfg.expires.getTime() - nowDate.getTime();
+                if (timeDiff > 0) {
+                    maxAge = Math.round(timeDiff / 1000);
+                    if (maxAge > 0)
+                        cookieVal += "; Max-Age=" + maxAge.toFixed(0);
+                }
+            }
+            if (cfg.domain)
+                cookieVal += "; Domain=" + cfg.domain;
+            if (cfg.path)
+                cookieVal += "; Path=" + cfg.path;
+            if (cfg.secure)
+                cookieVal += "; Secure";
+            if (cfg.httpOnly)
+                cookieVal += "; HttpOnly";
+            if (cfg.sameSite)
+                cookieVal += "; SameSite=" + cfg.sameSite;
+            result.push(cookieVal);
+        });
+        return result;
+    };
+    return Cookies;
+}());
+exports.Cookies = Cookies;
+//# sourceMappingURL=Cookies.js.map

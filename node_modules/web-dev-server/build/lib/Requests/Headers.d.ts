@@ -1,0 +1,19 @@
+import { Request } from "../Request";
+import { IRequestHeaders } from "./IRequestHeaders";
+export declare class Headers {
+    SetHeaders(headers?: any): Headers;
+    GetHeaders(nameReplaceFilter?: string | false | {
+        pattern: string | RegExp;
+        replace: string | Function;
+    }, valueReplaceFilter?: string | false | {
+        pattern: string | RegExp;
+        replace: string | Function;
+    }, onlyNames?: string[]): IRequestHeaders;
+    SetHeader(name?: string, value?: string | string[]): Request;
+    GetHeader(name?: string, replaceFilter?: string | false | {
+        pattern: string | RegExp;
+        replace: string | Function;
+    }, ifNullValue?: any): string | null;
+    HasHeader(name?: string): boolean;
+    IsUpgrading(): boolean;
+}

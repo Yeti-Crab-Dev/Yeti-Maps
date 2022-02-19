@@ -1,0 +1,43 @@
+export declare class Protected {
+    /**
+ * Get param value from given collection (`GET`, `POST` or http headers),
+ * filtered by characters defined in second argument through `replace()`.
+ * Place into second argument only char groups you want to keep.
+ * @param collection Array with request params or array with request headers.
+ * @param name Parameter string name.
+ * @param replaceFilter If String - list of regular expression characters to only keep, if array - `replace()` pattern and reverse, if `false`, raw value is returned.
+ * @param ifNullValue Default value returned if given param name is null.
+ * @param targetType Target type to retype param value or default if-null value. If param is an array, every param item will be retyped into given target type.
+ */
+    static GetParamFromCollection(paramsCollection?: any, name?: string, nameReplaceFilter?: string | false | {
+        pattern: string | RegExp;
+        replace: string | Function;
+    }, valueReplaceFilter?: string | false | {
+        pattern: string | RegExp;
+        replace: string | Function;
+    }, ifNullValue?: any): any;
+    /**
+     * Get filtered param or header value for characters defined as second argument to use them in `replace()`.
+     * @param rawValue
+     * @param replaceFilter If String - list of regular expression characters to only keep, if array - `replace()` pattern and reverse, if `false`, raw value is returned.
+     * @param ifNullValue Default value returned if given param name is null.
+     * @param targetType Target type to retype param value or default if-null value. If param is an array, every param item will be retyped into given target type.
+     */
+    static GetParamItem(rawValue?: any, nameReplaceFilter?: string | false | {
+        pattern: string | RegExp;
+        replace: string | Function;
+    }, valueReplaceFilter?: string | false | {
+        pattern: string | RegExp;
+        replace: string | Function;
+    }, ifNullValue?: any): any;
+    /**
+     * Clean param value by given list of allowed chars or by given `preg_replace()` pattern and reverse.
+     * @param rawValue
+     * @param replaceFilter If String - list of regular expression characters to only keep, if array - `replace()` pattern and reverse, if `false`, raw value is returned.
+     * @return string
+     */
+    static CleanParamValue(rawValue: string, replaceFilter?: string | false | {
+        pattern: string | RegExp;
+        replace: string | Function;
+    }): any;
+}

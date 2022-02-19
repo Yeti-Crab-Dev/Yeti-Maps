@@ -1,0 +1,4 @@
+export declare class MapHelper {
+    static ObjectToMap<TValue>(obj: object): Map<string, TValue>;
+    static MapToObject<TValue>(map: Map<string, TValue>): any;
+}

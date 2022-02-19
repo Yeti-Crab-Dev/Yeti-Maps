@@ -1,0 +1,10 @@
+import { Response } from "../Response";
+import { IResponseCookie } from "./IResponseCookie";
+export declare class Cookies {
+    protected cookies: Map<string, IResponseCookie>;
+    protected cookiesToDelete: Map<string, IResponseCookie>;
+    SetCookie(cfg: IResponseCookie): Response;
+    HasCookie(name: string): boolean;
+    DeleteCookie(name: string): Response;
+    protected getCookiesHeaders(): string[];
+}

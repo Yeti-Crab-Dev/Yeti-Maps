@@ -1,0 +1,48 @@
+Object.defineProperty(exports, "__esModule", { value: true });
+var Stream = /** @class */ (function () {
+    function Stream() {
+    }
+    Stream.prototype.Read = function (size) {
+        var httpReq = this['http'];
+        return httpReq.read(size);
+    };
+    Stream.prototype.SetEncoding = function (encoding) {
+        var httpReq = this['http'];
+        return httpReq.setEncoding(encoding);
+    };
+    Stream.prototype.Pause = function () {
+        var httpReq = this['http'];
+        return httpReq.pause();
+    };
+    Stream.prototype.Resume = function () {
+        var httpReq = this['http'];
+        return httpReq.resume();
+    };
+    Stream.prototype.IsPaused = function () {
+        var httpReq = this['http'];
+        return httpReq.isPaused();
+    };
+    Stream.prototype.UnPipe = function (destination) {
+        var httpReq = this['http'];
+        return httpReq.unpipe(destination);
+    };
+    Stream.prototype.Unshift = function (chunk, encoding) {
+        var httpReq = this['http'];
+        return httpReq.unshift(chunk, encoding);
+    };
+    Stream.prototype.Wrap = function (oldStream) {
+        var httpReq = this['http'];
+        return httpReq.wrap(oldStream);
+    };
+    Stream.prototype.Push = function (chunk, encoding) {
+        var httpReq = this['http'];
+        return httpReq.push(chunk, encoding);
+    };
+    Stream.prototype.Pipe = function (destination, options) {
+        var httpReq = this['http'];
+        return httpReq.pipe(destination, options);
+    };
+    return Stream;
+}());
+exports.Stream = Stream;
+//# sourceMappingURL=Stream.js.map

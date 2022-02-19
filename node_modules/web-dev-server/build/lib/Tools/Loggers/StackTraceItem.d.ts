@@ -1,0 +1,16 @@
+import { CallSite } from "./CallSite";
+export interface StackTraceItem {
+    stack: CallSite;
+    scope: any;
+    fnFullName: string;
+    isConstructor: boolean;
+    isNative: boolean;
+    isToplevel: boolean;
+    isEval: boolean;
+    arguments: any[];
+    argumentsSerialized: string;
+    file: string;
+    line: number;
+    column: number;
+    evalOrigin: string | null;
+}

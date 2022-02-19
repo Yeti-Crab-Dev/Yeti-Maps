@@ -1,0 +1,23 @@
+import { Request } from "../Request";
+import { IRequestCookies } from "./IRequestCookies";
+export declare class Cookies {
+    protected cookies?: IRequestCookies;
+    SetCookies(cookies: IRequestCookies): Request;
+    GetCookies(nameReplaceFilter?: string | false | {
+        pattern: string | RegExp;
+        replace: string | Function;
+    }, valueReplaceFilter?: string | false | {
+        pattern: string | RegExp;
+        replace: string | Function;
+    }, onlyNames?: string[]): IRequestCookies;
+    SetCookie(name: string, value: string): Request;
+    GetCookie(name?: string, valueReplaceFilter?: string | false | {
+        pattern: string | RegExp;
+        replace: string | Function;
+    }, ifNullValue?: string): string | null;
+    HasCookie(name: string): boolean;
+    /**
+     * @summary Parse "Cookie" header into local cookies map.
+     */
+    protected initCookies(): void;
+}

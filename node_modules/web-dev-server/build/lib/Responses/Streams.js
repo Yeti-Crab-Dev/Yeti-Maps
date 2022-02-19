@@ -1,0 +1,16 @@
+Object.defineProperty(exports, "__esModule", { value: true });
+var Streams = /** @class */ (function () {
+    function Streams() {
+    }
+    Streams.prototype.Write = function (chunk, encoding, cb) {
+        var httpRes = this['http'];
+        return httpRes.write(chunk, encoding, cb);
+    };
+    Streams.prototype.Pipe = function (destination, options) {
+        var httpReq = this['http'];
+        return httpReq.pipe(destination, options);
+    };
+    return Streams;
+}());
+exports.Streams = Streams;
+//# sourceMappingURL=Streams.js.map

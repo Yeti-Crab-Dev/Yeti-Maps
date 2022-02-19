@@ -1,0 +1,60 @@
+Object.defineProperty(exports, "__esModule", { value: true });
+var QueryStringCollection = /** @class */ (function () {
+    function QueryStringCollection() {
+        var numericKeys = true, arrStore = [], objectStore = {};
+        return new Proxy(this, {
+            getPrototypeOf: function (target) {
+                var result = numericKeys
+                    ? arrStore
+                    : objectStore;
+                numericKeys = undefined;
+                arrStore = undefined;
+                objectStore = undefined;
+                return result;
+            },
+            get: function (target, prop, receiver) {
+                return numericKeys
+                    ? arrStore[prop]
+                    : objectStore[prop];
+            },
+            has: function (target, prop) {
+                return numericKeys
+                    ? prop in arrStore
+                    : prop in objectStore;
+            },
+            set: function (target, prop, value, reciever) {
+                if (!isNaN(prop)) {
+                    // prop is numeric
+                    if (numericKeys) {
+                        // it could be still used array store
+                        arrStore[prop] = value; // length is shifted automatically forward
+                    }
+                    else {
+                        // store is downgraded to object store
+                        objectStore[prop] = value;
+                    }
+                }
+                else {
+                    // prop is not numeric
+                    if (numericKeys) {
+                        // if there is still used array store - downgrade it into object store:
+                        numericKeys = false;
+                        objectStore = {};
+                        arrStore.forEach(function (valueLocal, index) {
+                            objectStore[index] = valueLocal;
+                        });
+                        arrStore = undefined;
+                        objectStore[prop] = value;
+                    }
+                    else {
+                        objectStore[prop] = value;
+                    }
+                }
+                return true;
+            }
+        });
+    }
+    return QueryStringCollection;
+}());
+exports.QueryStringCollection = QueryStringCollection;
+//# sourceMappingURL=Collection.js.map

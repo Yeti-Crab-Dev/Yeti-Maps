@@ -1,0 +1,29 @@
+Object.defineProperty(exports, "__esModule", { value: true });
+var tslib_1 = require("tslib");
+var Logger_1 = require("./Logger");
+var MapConverter = tslib_1.__importStar(require("./Helpers/MapHelper"));
+var NumberFormatter = tslib_1.__importStar(require("./Helpers/NumberHelper"));
+var ObjectHelper = tslib_1.__importStar(require("./Helpers/ObjectHelper"));
+var StringHelper = tslib_1.__importStar(require("./Helpers/StringHelper"));
+var Tools;
+(function (Tools) {
+    var Logger = /** @class */ (function (_super) {
+        tslib_1.__extends(Logger, _super);
+        function Logger() {
+            return _super !== null && _super.apply(this, arguments) || this;
+        }
+        return Logger;
+    }(Logger_1.Logger));
+    Tools.Logger = Logger;
+    ;
+})(Tools = exports.Tools || (exports.Tools = {}));
+(function (Tools) {
+    var Helpers;
+    (function (Helpers) {
+        Helpers.Map = MapConverter.MapHelper;
+        Helpers.Number = NumberFormatter.NumberHelper;
+        Helpers.Object = ObjectHelper.ObjectHelper;
+        Helpers.String = StringHelper.StringHelper;
+    })(Helpers = Tools.Helpers || (Tools.Helpers = {}));
+})(Tools = exports.Tools || (exports.Tools = {}));
+//# sourceMappingURL=Namespace.js.map

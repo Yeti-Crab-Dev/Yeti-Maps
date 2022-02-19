@@ -1,0 +1,22 @@
+Object.defineProperty(exports, "__esModule", { value: true });
+var MapHelper = /** @class */ (function () {
+    function MapHelper() {
+    }
+    MapHelper.ObjectToMap = function (obj) {
+        var result = new Map();
+        Object.keys(obj).forEach(function (key) {
+            result.set(key, obj[key]);
+        });
+        return result;
+    };
+    MapHelper.MapToObject = function (map) {
+        var result = {};
+        map.forEach(function (value, key) {
+            result[key] = value;
+        });
+        return result;
+    };
+    return MapHelper;
+}());
+exports.MapHelper = MapHelper;
+//# sourceMappingURL=MapHelper.js.map

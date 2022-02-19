@@ -1,0 +1,6 @@
+import { Request } from "../Request";
+export declare class Static {
+    protected static twoSegmentTlds: Map<string, boolean>;
+    static AddTwoSegmentTlds(...twoSegmentTlds: string[]): typeof Request;
+    static ParseHttpAcceptLang(languagesList: string): Map<number, string[]>;
+}

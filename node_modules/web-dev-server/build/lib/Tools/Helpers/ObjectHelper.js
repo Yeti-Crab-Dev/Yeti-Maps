@@ -1,0 +1,49 @@
+Object.defineProperty(exports, "__esModule", { value: true });
+var ObjectHelper = /** @class */ (function () {
+    function ObjectHelper() {
+    }
+    ObjectHelper.Mixins = function (derivedCtor, baseCtors) {
+        var protectedElms = this.PROTECTED_ELMS;
+        baseCtors.forEach(function (baseCtor) {
+            Object.getOwnPropertyNames(baseCtor.prototype).forEach(function (name) {
+                if (!name.match(protectedElms))
+                    Object.defineProperty(derivedCtor.prototype, name, Object.getOwnPropertyDescriptor(baseCtor.prototype, name));
+            });
+            var baseCtorStaticElms = Object.getOwnPropertyDescriptors(baseCtor);
+            for (var key in baseCtorStaticElms)
+                if (!key.match(protectedElms))
+                    derivedCtor[key] = baseCtorStaticElms[key].value;
+        });
+    };
+    ObjectHelper.Extend = function (child, parent) {
+        var F = function () { }, protectedElms = this.PROTECTED_ELMS, parentStaticElms = Object.getOwnPropertyDescriptors(parent), childStaticElms = Object.getOwnPropertyDescriptors(child), childProtoElms = Object.getOwnPropertyDescriptors(child.prototype);
+        F.prototype = parent.prototype;
+        child.prototype = new F();
+        child.prototype.constructor = child;
+        for (var key in parentStaticElms)
+            if (!key.match(protectedElms))
+                child[key] = parentStaticElms[key].value;
+        for (var key in childStaticElms)
+            if (!key.match(protectedElms))
+                child[key] = childStaticElms[key].value;
+        for (var key in childProtoElms)
+            child.prototype[key] = childProtoElms[key].value;
+    };
+    ObjectHelper.RealTypeOf = function (obj) {
+        var proto = Object.getPrototypeOf(obj);
+        if (proto && proto.constructor) {
+            return proto.constructor.name;
+        }
+        else {
+            var s = Object.prototype.toString.apply(obj);
+            return s.substr(8, s.length - 9);
+        }
+    };
+    ObjectHelper.IsPrimitiveType = function (obj) {
+        return (obj !== Object(obj));
+    };
+    ObjectHelper.PROTECTED_ELMS = /^(?:constructor|prototype|length|name|arguments|caller|call|apply|bind|toString)$/g;
+    return ObjectHelper;
+}());
+exports.ObjectHelper = ObjectHelper;
+//# sourceMappingURL=ObjectHelper.js.map

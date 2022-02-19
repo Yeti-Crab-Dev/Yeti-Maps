@@ -1,0 +1,22 @@
+Object.defineProperty(exports, "__esModule", { value: true });
+function createNamespace(name, session) {
+    var Namespace = /** @class */ (function () {
+        function Namespace() {
+        }
+        Namespace.prototype.SetExpirationHoops = function (hoops) {
+            session['setNamespaceExpirationHoops'](name, hoops);
+            return this;
+        };
+        Namespace.prototype.SetExpirationSeconds = function (seconds) {
+            session['setNamespaceExpirationTime'](name, seconds);
+            return this;
+        };
+        Namespace.prototype.Destroy = function () {
+            session['destroyNamespace'](name);
+        };
+        return Namespace;
+    }());
+    return new Namespace();
+}
+exports.createNamespace = createNamespace;
+//# sourceMappingURL=Namespace.js.map

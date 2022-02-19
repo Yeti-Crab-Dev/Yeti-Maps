@@ -1,0 +1,3 @@
+import { INamespace } from "./INamespace";
+import { Session } from "../Session";
+export declare function createNamespace(name: string, session: Session): INamespace;

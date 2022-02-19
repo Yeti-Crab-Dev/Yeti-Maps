@@ -1,0 +1,21 @@
+export declare class Defaults {
+    static ICONS: {
+        FAVICON: string;
+        FOLDER: string;
+        FILE: string;
+    };
+    static CODES: {
+        HTML: string;
+        HEAD_FOUND: string;
+        HEAD_NOT_FOUND: string;
+        HEAD_NOT_ALLOWED: string;
+        HEAD_ERROR: string;
+        HEADER_FOUND: string;
+        HEADER_NOT_FOUND: string;
+        HEADER_NOT_ALLOWED: string;
+        HEADER_ERROR: string;
+        LIST: string;
+        DIR_ROW: string;
+        FILE_ROW: string;
+    };
+}

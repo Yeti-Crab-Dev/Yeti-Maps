@@ -1,0 +1,86 @@
+Object.defineProperty(exports, "__esModule", { value: true });
+var Protected_1 = require("./Protected");
+var Cookies = /** @class */ (function () {
+    function Cookies() {
+    }
+    Cookies.prototype.SetCookies = function (cookies) {
+        this.cookies = cookies;
+        return this;
+    };
+    Cookies.prototype.GetCookies = function (nameReplaceFilter, valueReplaceFilter, onlyNames) {
+        if (nameReplaceFilter === void 0) { nameReplaceFilter = "\-\._a-zA-Z0-9"; }
+        if (valueReplaceFilter === void 0) { valueReplaceFilter = { pattern: /[\<\>\'"]/g, replace: '' }; }
+        if (onlyNames === void 0) { onlyNames = []; }
+        if (this.cookies == null)
+            this.initCookies();
+        var result = new Map();
+        var noNameFiltering = !nameReplaceFilter || nameReplaceFilter === '.*';
+        var noValueFiltering = !valueReplaceFilter || valueReplaceFilter === '.*';
+        if (noNameFiltering && noValueFiltering) {
+            if (onlyNames.length > 0) {
+                this.cookies.forEach(function (cookie, name) {
+                    if (onlyNames.indexOf(name) != -1)
+                        result.set(name, cookie);
+                });
+            }
+            else {
+                result = this.cookies;
+            }
+            return result;
+        }
+        this.cookies.forEach(function (cookie, name) {
+            if (onlyNames.length > 0 && onlyNames.indexOf(name) == -1)
+                return;
+            var cleanedName = noNameFiltering
+                ? name
+                : Protected_1.Protected.CleanParamValue(name, nameReplaceFilter);
+            var cleanedValue = noValueFiltering
+                ? cookie
+                : Protected_1.Protected.CleanParamValue(cookie, valueReplaceFilter);
+            result.set(cleanedName, cleanedValue);
+        });
+        return result;
+    };
+    Cookies.prototype.SetCookie = function (name, value) {
+        if (this.cookies == null)
+            this.initCookies();
+        this.cookies.set(name, value == null ? '' : value);
+        return this;
+    };
+    Cookies.prototype.GetCookie = function (name, valueReplaceFilter, ifNullValue) {
+        if (name === void 0) { name = ''; }
+        if (valueReplaceFilter === void 0) { valueReplaceFilter = "\;\,\-\.\@\=\+\?\!\/ _a-zA-Z0-9"; }
+        if (ifNullValue === void 0) { ifNullValue = null; }
+        if (this.cookies == null)
+            this.initCookies();
+        return Protected_1.Protected.GetParamFromCollection(this.cookies, name, false, valueReplaceFilter, ifNullValue);
+    };
+    Cookies.prototype.HasCookie = function (name) {
+        if (this.cookies == null)
+            this.initCookies();
+        return this.cookies.has(name);
+    };
+    /**
+     * @summary Parse "Cookie" header into local cookies map.
+     */
+    Cookies.prototype.initCookies = function () {
+        this.cookies = new Map();
+        var headers = this['http'].headers, rawHeader = headers["cookie"];
+        if (rawHeader == null)
+            return;
+        var rawCookies = String(rawHeader).split(';'), rawCookie, equalPos;
+        for (var i = 0, l = rawCookies.length; i < l; i++) {
+            rawCookie = rawCookies[i].trim();
+            equalPos = rawCookie.indexOf('=');
+            if (equalPos == -1) {
+                this.cookies.set(rawCookie, '');
+            }
+            else {
+                this.cookies.set(rawCookie.substr(0, equalPos).trim(), rawCookie.substr(equalPos + 1).trim());
+            }
+        }
+    };
+    return Cookies;
+}());
+exports.Cookies = Cookies;
+//# sourceMappingURL=Cookies.js.map

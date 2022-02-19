@@ -1,0 +1,7 @@
+export declare class ObjectHelper {
+    static PROTECTED_ELMS: RegExp;
+    static Mixins(derivedCtor: any, baseCtors: any[]): void;
+    static Extend(child: any, parent: any): void;
+    static RealTypeOf(obj: any): string;
+    static IsPrimitiveType(obj: any): boolean;
+}

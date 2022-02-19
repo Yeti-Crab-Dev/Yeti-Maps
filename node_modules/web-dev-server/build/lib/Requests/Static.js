@@ -1,0 +1,62 @@
+Object.defineProperty(exports, "__esModule", { value: true });
+var Static = /** @class */ (function () {
+    function Static() {
+    }
+    Static.AddTwoSegmentTlds = function () {
+        var twoSegmentTlds = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            twoSegmentTlds[_i] = arguments[_i];
+        }
+        for (var i = 0, l = twoSegmentTlds.length; i < l; i++)
+            this.twoSegmentTlds.set(twoSegmentTlds[i], true);
+        return this;
+    };
+    Static.ParseHttpAcceptLang = function (languagesList) {
+        var languages = [], ranges = languagesList.trim().split(','), range, langAndLocaleAndPriority, pos, priority, langAndLocale;
+        for (var i = 0, l = ranges.length; i < l; i++) {
+            range = ranges[i].trim();
+            pos = range.indexOf(';');
+            if (pos == -1) {
+                priority = 1.0;
+                langAndLocale = range;
+            }
+            else {
+                langAndLocaleAndPriority = range.split(';');
+                priority = parseFloat(langAndLocaleAndPriority[1]
+                    .replace(/^([^\=]+)\=(.*)$/g, '$2')
+                    .replace(/([^\-\.0-9]+)/g, ''));
+                if (isNaN(priority))
+                    priority = 1.0;
+                langAndLocale = langAndLocaleAndPriority[0];
+            }
+            langAndLocale = langAndLocale.replace(/\-/g, '_');
+            pos = langAndLocale.indexOf('_');
+            if (pos == -1) {
+                languages.push({
+                    priority: priority,
+                    values: [
+                        langAndLocale.toLowerCase()
+                    ]
+                });
+            }
+            else {
+                languages.push({
+                    priority: priority,
+                    values: [
+                        langAndLocale.substr(0, pos).toLowerCase(),
+                        langAndLocale.substr(pos + 1).toUpperCase(),
+                    ]
+                });
+            }
+        }
+        return new Map(Array.from(languages).sort(function (a, b) {
+            return a.priority - b.priority;
+        })
+            .reverse()
+            .map(function (item) { return [item.priority, item.values]; }));
+    };
+    Static.twoSegmentTlds = new Map();
+    return Static;
+}());
+exports.Static = Static;
+//# sourceMappingURL=Static.js.map

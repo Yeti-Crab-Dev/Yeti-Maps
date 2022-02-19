@@ -1,0 +1,5 @@
+export interface QueryStringLastLevel {
+    level: any;
+    key: string | number;
+    lastId: number;
+}

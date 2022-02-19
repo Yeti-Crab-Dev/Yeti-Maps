@@ -1,0 +1,3 @@
+export declare class DateHelper {
+    static FormatForDirOutput(date: Date): string;
+}

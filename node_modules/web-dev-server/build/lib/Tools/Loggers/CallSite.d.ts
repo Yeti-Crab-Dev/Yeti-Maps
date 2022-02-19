@@ -1,0 +1,19 @@
+/**
+ * @see https://v8.dev/docs/stack-trace-api
+ */
+export interface CallSite {
+    getFunction(): Function | null;
+    getScriptNameOrSourceURL(): string | null;
+    getFileName(): string | null;
+    getEvalOrigin(): string | null;
+    getFunctionName(): string | null;
+    getTypeName(): string | null;
+    getMethodName(): string | null;
+    getThis(): any;
+    isToplevel(): boolean;
+    isConstructor(): boolean;
+    isNative(): boolean;
+    isEval(): boolean;
+    getLineNumber(): number;
+    getColumnNumber(): number;
+}

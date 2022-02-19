@@ -1,0 +1,16 @@
+Object.defineProperty(exports, "__esModule", { value: true });
+var Constants = /** @class */ (function () {
+    function Constants() {
+    }
+    Constants.CODES = {
+        OK: 200,
+        MOVED_PERMANENTLY: 301,
+        SEE_OTHER: 303,
+        NOT_FOUND: 404,
+        INTERNAL_SERVER_ERROR: 500
+    };
+    Constants.HEADER_X_CPU_RAM = 'X-Cpu-Ram';
+    return Constants;
+}());
+exports.Constants = Constants;
+//# sourceMappingURL=Constants.js.map

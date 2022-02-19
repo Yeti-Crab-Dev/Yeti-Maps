@@ -1,0 +1,18 @@
+export interface INamespace {
+    /**
+     * Set session namespace expiration by request(s) count.
+     * @param hoops
+     */
+    SetExpirationHoops(hoops: number): INamespace;
+    /**
+     * Set session namespace expiration by expiration seconds.
+     * Zero (`0`) means "until the browser is closed" if there is no more
+     * higher namespace expirations in whole session.
+     * @param seconds
+     */
+    SetExpirationSeconds(seconds: number): INamespace;
+    /**
+     * @summary Indexer for any value;
+     */
+    [key: string]: any;
+}

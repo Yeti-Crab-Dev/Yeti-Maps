@@ -1,0 +1,58 @@
+Object.defineProperty(exports, "__esModule", { value: true });
+var http_1 = require("http");
+var ObjectHelper_1 = require("./Tools/Helpers/ObjectHelper");
+var Constants_1 = require("./Responses/Constants");
+var Content_1 = require("./Responses/Content");
+var Cookies_1 = require("./Responses/Cookies");
+var Headers_1 = require("./Responses/Headers");
+var Streams_1 = require("./Responses/Streams");
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Response = /** @class */ (function () {
+    var Response = /** @class */ (function () {
+        function Response(req) {
+            //super(req);
+            // @ts-ignore
+            http_1.ServerResponse.call(this, req);
+            this.http = this;
+            this.req = req;
+            this['httpVersion'] = null;
+            this['headers'] = {};
+            this['encoding'] = null;
+            this['disabledHeaders'] = new Map();
+            this['body'] = null;
+            this['cookies'] = new Map();
+        }
+        Response.prototype.AddListener = function () {
+            return this.http.addListener.apply(this, [].slice.apply(arguments));
+        };
+        Response.prototype.Emit = function () {
+            return this.http.emit.apply(this, [].slice.apply(arguments));
+        };
+        Response.prototype.On = function () {
+            return this.http.on.apply(this, [].slice.apply(arguments));
+        };
+        Response.prototype.Once = function () {
+            return this.http.once.apply(this, [].slice.apply(arguments));
+        };
+        Response.prototype.PrependListener = function () {
+            return this.http.prependListener.apply(this, [].slice.apply(arguments));
+        };
+        Response.prototype.PrependOnceListener = function () {
+            return this.http.prependOnceListener.apply(this, [].slice.apply(arguments));
+        };
+        Response.prototype.RemoveListener = function () {
+            return this.http.removeListener.apply(this, [].slice.apply(arguments));
+        };
+        return Response;
+    }());
+    ObjectHelper_1.ObjectHelper.Extend(Response, http_1.ServerResponse);
+    ObjectHelper_1.ObjectHelper.Mixins(Response, [
+        Constants_1.Constants,
+        Content_1.Content,
+        Cookies_1.Cookies,
+        Headers_1.Headers,
+        Streams_1.Streams
+    ]);
+    return Response;
+}());
+//# sourceMappingURL=Response.js.map

@@ -1,0 +1,23 @@
+import { Request } from "../Request";
+export declare class Localization {
+    /**
+     * Language international code, lower case, not used by default.
+     * Or use this variable by your own decision.
+     * Example: `"en" | "de"`
+     */
+    protected lang?: string;
+    /**
+     * Country/locale code, upper case, not used by default.
+     * Or use this variable by your own decision.
+     * Example: `"US" | "UK"`
+     */
+    protected locale?: string;
+    SetLang(lang: string | null): Request;
+    GetLang(): string | null;
+    SetLocale(locale: string | null): Request;
+    GetLocale(): string | null;
+    /**
+     * Initialize language code and locale code from raw header `Http-Accept-Language`.
+     */
+    protected initLangAndLocale(): void;
+}

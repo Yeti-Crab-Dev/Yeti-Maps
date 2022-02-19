@@ -1,0 +1,66 @@
+Object.defineProperty(exports, "__esModule", { value: true });
+var Protected_1 = require("./Protected");
+var Headers = /** @class */ (function () {
+    function Headers() {
+    }
+    Headers.prototype.SetHeaders = function (headers) {
+        if (headers === void 0) { headers = {}; }
+        var currentHeaders = this['http'].headers;
+        for (var key in headers)
+            currentHeaders[key.toLowerCase()] = headers[key];
+        return this;
+    };
+    Headers.prototype.GetHeaders = function (nameReplaceFilter, valueReplaceFilter, onlyNames) {
+        if (nameReplaceFilter === void 0) { nameReplaceFilter = "\-a-zA-Z0-9"; }
+        if (valueReplaceFilter === void 0) { valueReplaceFilter = { pattern: /[\<\>\'"]/g, replace: '' }; }
+        if (onlyNames === void 0) { onlyNames = []; }
+        var headers = this['http'].headers, result = {}, cleanedName, noNameFiltering = !nameReplaceFilter || nameReplaceFilter === '.*', noValueFiltering = !valueReplaceFilter || valueReplaceFilter === '.*';
+        if (noNameFiltering && noValueFiltering) {
+            if (onlyNames.length > 0) {
+                for (var name in headers) {
+                    if (onlyNames.indexOf(name) != -1)
+                        result[name] = headers[name];
+                }
+            }
+            else {
+                result = headers;
+            }
+            return result;
+        }
+        for (var name in headers) {
+            cleanedName = noNameFiltering
+                ? name
+                : Protected_1.Protected.CleanParamValue(name, nameReplaceFilter);
+            result[cleanedName] = noValueFiltering
+                ? headers[name]
+                : Protected_1.Protected.GetParamFromCollection(headers, name, nameReplaceFilter, valueReplaceFilter, null);
+        }
+        return result;
+    };
+    Headers.prototype.SetHeader = function (name, value) {
+        if (name === void 0) { name = ''; }
+        if (value === void 0) { value = ''; }
+        var headers = this['http'].headers;
+        headers[name.toLowerCase()] = value;
+        return this;
+    };
+    Headers.prototype.GetHeader = function (name, replaceFilter, ifNullValue) {
+        if (name === void 0) { name = ''; }
+        if (replaceFilter === void 0) { replaceFilter = { pattern: /[\<\>\'"]/g, replace: '' }; }
+        if (ifNullValue === void 0) { ifNullValue = null; }
+        var headers = this['http'].headers;
+        return Protected_1.Protected.GetParamFromCollection(headers, name.toLowerCase(), false, replaceFilter, ifNullValue);
+    };
+    Headers.prototype.HasHeader = function (name) {
+        if (name === void 0) { name = ''; }
+        var headers = this['http'].headers;
+        return name.toLowerCase() in headers;
+    };
+    Headers.prototype.IsUpgrading = function () {
+        var upgrHeader = this.GetHeader('upgrading');
+        return upgrHeader && upgrHeader.length > 0;
+    };
+    return Headers;
+}());
+exports.Headers = Headers;
+//# sourceMappingURL=Headers.js.map

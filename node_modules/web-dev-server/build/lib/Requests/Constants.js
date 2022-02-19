@@ -1,0 +1,41 @@
+Object.defineProperty(exports, "__esModule", { value: true });
+var Constants = /** @class */ (function () {
+    function Constants() {
+    }
+    Constants.SCHEME_HTTP = 'http:';
+    Constants.SCHEME_HTTPS = 'https:';
+    Constants.SCHEME_FTP = 'ftp:';
+    Constants.SCHEME_FTPS = 'ftps:';
+    Constants.SCHEME_IRC = 'irc:';
+    Constants.SCHEME_IRCS = 'ircs:';
+    Constants.SCHEME_MAILTO = 'mailto:';
+    Constants.SCHEME_FILE = 'file:';
+    Constants.SCHEME_DATA = 'data:';
+    Constants.SCHEME_TEL = 'tel:';
+    Constants.SCHEME_TELNET = 'telnet:';
+    Constants.SCHEME_LDAP = 'ldap:';
+    Constants.SCHEME_SSH = 'ssh:';
+    Constants.SCHEME_RTSP = 'rtsp:';
+    Constants.SCHEME_RTP = 'rtp:';
+    Constants.METHOD_GET = 'GET';
+    Constants.METHOD_POST = 'POST';
+    Constants.METHOD_PUT = 'PUT';
+    Constants.METHOD_DELETE = 'DELETE';
+    Constants.METHOD_HEAD = 'HEAD';
+    Constants.METHOD_OPTIONS = 'OPTIONS';
+    Constants.METHOD_PATCH = 'PATCH';
+    Constants.PARAM_FILTER_ALPHABETS = 'a-zA-Z';
+    Constants.PARAM_FILTER_ALPHABETS_LOWER = 'a-z';
+    Constants.PARAM_FILTER_ALPHABETS_UPPER = 'A-Z';
+    Constants.PARAM_FILTER_ALPHABETS_DIGITS = 'a-zA-Z0-9';
+    Constants.PARAM_FILTER_ALPHABETS_PUNCT = 'a-zA-Z\-\.\, ;`"\'\:\?\!';
+    Constants.PARAM_FILTER_ALPHABETS_NUMERICS_PUNCT = 'a-zA-Z0-9\+\-\.\, ;`"\'\:\?\!';
+    Constants.PARAM_FILTER_ALPHABETS_NUMERICS_PUNCT_SPECIAL = 'a-zA-Z0-9\+\-\.\, ;`"\'\:\?\!%_/@~\#\&\$\[\]\(\)\{\}\|\=\*\^';
+    Constants.PARAM_FILTER_PUNCT = '\-\.\, ;`"\'\:\?\!';
+    Constants.PARAM_FILTER_SPECIAL = '%_/@~\#\&\$\[\]\(\)\{\}\|\=\*\^';
+    Constants.PARAM_FILTER_DIGITS = '0-9';
+    Constants.PARAM_FILTER_NUMERICS = '-\+0-9\.\,';
+    return Constants;
+}());
+exports.Constants = Constants;
+//# sourceMappingURL=Constants.js.map
