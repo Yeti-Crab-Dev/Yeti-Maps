@@ -1,0 +1,23 @@
+{
+  "name": "scratch-project",
+  "version": "1.0.0",
+  "description": "Keeping all your favorite places in one app.",
+  "main": "webpack.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yeti-Crab-Dev/Scratch-Project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Yeti-Crab-Dev/Scratch-Project/issues"
+  },
+  "homepage": "https://github.com/Yeti-Crab-Dev/Scratch-Project#readme",
+  "dependencies": {
+    "styles-loader": "^3.0.0"
+  },
+  "devDependencies": {}
+}
