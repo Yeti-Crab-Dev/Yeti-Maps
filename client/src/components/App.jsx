@@ -1,13 +1,15 @@
 import React from 'react';
 import { Form } from './Form.jsx'
 import GoogleMap from './GoogleMap'
+import ShowPost from './ShowPost.jsx'
 
 const App = () => {
     return (
         <div>
-            <h1>This is a Test</h1>
+            <h1></h1>
             <Form />
             <GoogleMap />
+            <ShowPost />
         </div>
     )
 
