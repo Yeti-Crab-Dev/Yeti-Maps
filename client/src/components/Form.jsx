@@ -1,15 +1,27 @@
-import React, { useState } from 'react';
+import React, { Fragment, useState } from 'react';
 
 const Form = () => {
 
-    const [location, setLocation] = useState('');
-    const [post, setPost] = useState('');
-    
-    
+    const [city, setCity] = useState('');
+    const [country, setCounty] = useState('');
+    const [personId, setPersonId] = useState('');
+
+
     return (
-        <div>
-            <h1>Sup</h1>
-        </div>
+        <Fragment>
+            <form >
+                <div>
+                    <div>{personId}</div>
+                    <div>{city}</div>
+                    <div>{country}</div>
+                    <div>
+                        <input type="text" placeholder="Comment" />
+                    </div>
+                </div>
+                <button >Submit</button>
+            </form>
+        </Fragment>
+
     )
 }
 
