@@ -13,7 +13,7 @@ const ShowPost = () => {
 
     const getAllComment = async () => {
         try {
-            const response = await fetch("http://localhost:3000/api");
+            const response = await fetch("http://localhost:3000/api/comments");
             const jsonData = await response.json();
             setComments(jsonData);
         } catch (err) {

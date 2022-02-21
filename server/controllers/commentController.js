@@ -4,7 +4,7 @@ const { response } = require('../server');
 const commentController = {};
 
 commentController.getAllComments = async (req, res, next) => {
-    const queryString = 'SELECT c.*, u.name AS users FROM comments c LEFT OUTER JOIN users u ON u.user_id = c.user_id;'
+    const queryString = 'SELECT p.*, u.username AS users, c.comment AS comment, c.city AS city, c.country AS country FROM pins p LEFT OUTER JOIN comments c ON p.comment_id = c.comment_id LEFT OUTER JOIN users u ON u.user_id = p.user_id;'
     const comments = [];
     try {
         const result = await db.query(queryString);
@@ -23,5 +23,21 @@ commentController.getAllComments = async (req, res, next) => {
     }
     
 };
+
+
+
+
+commentController.postComment = async (req, res, next) => {
+    const queryString = 'WITH ins1 AS (INSERT INTO comments(comment, city, country, user_id) VALUES ($1, $2, $3, $4) RETURNING comment_id) INSERT INTO pins (lat, long, comment_id, user_id) VALUES ($5, $6, (SELECT comment_id FROM ins1), $4);'
+    
+    try {
+        const {comment, city, country, user_id, lat, lng}  = req.body;
+        const params = [comment, city, country, user_id, lat, lng];
+        const newComment = await db.query(queryString, params);
+        res.locals.comment = newComment.rows[0];
+    } catch(err) {
+        console.log(err.message)
+    }
+}
 
 module.exports = commentController;

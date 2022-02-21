@@ -39,15 +39,19 @@ const containerStyle = {
     const onClick = (data)=>{
       console.log(data.latLng.lat())
       console.log(data.latLng.lng())
+      localStorage.setItem("lat", JSON.stringify(data.latLng.lat()))
+      localStorage.setItem("lng", JSON.stringify(data.latLng.lng()))
+      
 
       setMap(current => [
-        ...current,
+        // ...current,
         {
           lat : data.latLng.lat(),
           lng : data.latLng.lng()
         }
       ]);
     }
+
   
     return isLoaded ? (
         <GoogleMap
