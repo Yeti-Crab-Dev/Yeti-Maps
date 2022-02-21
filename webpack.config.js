@@ -31,5 +31,12 @@ module.exports = {
         new HtmlWebPackPlugin({
             template: "./client/index.html"
         })
-    ] 
+    ],
+    devServer: {
+        port: 8080, 
+        historyApiFallback: true,
+        proxy: {
+            '/api': 'http://localhost:3000',
+        },
+    }
 }

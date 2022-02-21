@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import axios from 'axios';
 
 const SignIn = () => {
 
@@ -7,7 +8,9 @@ const SignIn = () => {
 
     const submitHandler = e => {
         e.preventDefault();
-        console.log(username, password)
+        const body = {username, password};
+        axios.post('http://localhost:3000/api/userlogin', body)
+        .then(res => console.log(res))
     }
 
     return (

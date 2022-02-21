@@ -4,7 +4,7 @@
   "description": "Scratch Project by Michelle, Dee, Tony, Yurii, and Leonoor",
   "main": "index.js",
   "scripts": {
-    "letsgo": "concurrently \"cross-env NODE_ENV=development webpack-dev-server --open --hot --progress --color \" \"nodemon ./server/server.js\"",
+    "LFGGG": "concurrently \"NODE_ENV=development webpack serve --open\" \"nodemon ./server/server.js\"",
     "start": "webpack server --hot --mode development ",
     "build": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
