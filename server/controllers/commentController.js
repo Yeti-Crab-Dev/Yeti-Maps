@@ -39,6 +39,7 @@ commentController.postComment = async (req, res, next) => {
         const newComment = await db.query(queryString, params);
         // NOTE: inserting the created comment as a row in our comment table
         res.locals.comment = newComment.rows[0];
+        next();
     } catch(err) {
         console.log(err.message)
     }

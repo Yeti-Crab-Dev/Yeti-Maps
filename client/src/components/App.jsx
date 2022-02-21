@@ -19,7 +19,13 @@ class App extends React.Component {
     }
 
     componentDidMount(){
-        
+        this.handleUpdateComments();
+    }
+
+    componentDidUpdate(previousProps, previousState){
+        if(previousState.comments.length !== this.state.comments.length){
+            this.handleUpdateComments();
+        }
     }
 
     handleLoggedIn() {
@@ -28,11 +34,11 @@ class App extends React.Component {
     }
 
     async handleUpdateComments() {
+        console.log('Is it comming here')
         try {
             console.log('updating comments');
             const response = await fetch("http://localhost:3000/api/comments");
             const jsonData = await response.json();
-            console.log(jsonData);
             this.setState({comments:[...jsonData]});
             //setComments(jsonData);
         } catch (err) {

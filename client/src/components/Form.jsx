@@ -19,7 +19,9 @@ const Form = (props) => {
         lng = (localStorage.getItem("lng"));
         console.log(lat, lng);
         try {
+            console.log('test1');
             const body = { comment, city, country, user_id, lat, lng };
+            console.log('test2');
             const response = await fetch("http://localhost:3000/api/comments", {
                 method: "POST",
                 headers: {
@@ -27,8 +29,9 @@ const Form = (props) => {
                 },
                 body: JSON.stringify(body)
             })
-            console.log('test')
-            window.location = '/'
+            console.log('test3');
+            props.handleUpdateComments();
+            console.log('test4');
         } catch (err) {
             console.log(err.message);
         }
@@ -51,7 +54,7 @@ const Form = (props) => {
                         <input type="text" placeholder="Comment" value = {comment} onChange={e => setComment(e.target.value)}/>
                     </div>
                 </div>
-                <button onClick={props.handleUpdateComments}>Submit</button>
+                <button >Submit</button>
             </form>
         </Fragment>
 
