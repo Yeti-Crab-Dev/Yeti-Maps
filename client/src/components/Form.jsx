@@ -1,14 +1,16 @@
 import React, { Fragment, useState } from 'react';
 
+
 const Form = () => {
 
     const [city, setCity] = useState('');
     const [country, setCountry] = useState('');
-    const [user_id, setPersonId] = useState(1);
+    const [user_id, setPersonId] = useState(localStorage.getItem("id"));
     const [comment, setComment] = useState('');
 
     let lat;
     let lng;
+
 
     const onSubmitForm = async e => {
         e.preventDefault();
@@ -26,6 +28,7 @@ const Form = () => {
                 body: JSON.stringify(body)
             })
             console.log('test')
+            window.location = '/'
         } catch (err) {
             console.log(err.message);
         }
@@ -35,7 +38,7 @@ const Form = () => {
         <Fragment>
             <form onSubmit={onSubmitForm}>
                 <div>
-                    <div>{user_id}</div>
+                    <div><h4>Hello, user {user_id}</h4></div>
                     <div>{lat}</div>
                     <div>{lng}</div>
                     <div>
