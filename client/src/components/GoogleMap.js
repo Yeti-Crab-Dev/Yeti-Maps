@@ -1,5 +1,5 @@
 import { GoogleMap, Marker, useJsApiLoader } from '@react-google-maps/api';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 
 /// https://maps.googleapis.com/maps/api/geocode/json?latlng=46.49639813020755,-80.99861117865834&key=AIzaSyAjEu5jgZ4h62ka6lKGEx6cGJSX2FxettY
@@ -25,6 +25,9 @@ const containerStyle = {
     if(loadError) return <div>SHIIIIITTT</div>;
   
     const [map, setMap] = React.useState([]);
+
+    const [pins, setPins] = React.useState([]);
+  
   
     // const onLoad = React.useCallback(function callback(map) {
     //   const bounds = new window.google.maps.LatLngBounds();
@@ -34,6 +37,24 @@ const containerStyle = {
   
     // const onUnmount = React.useCallback(function callback(map) {
     //   setMap(null)
+    // }, [])
+
+    // const id = localStorage.setItem('id', JSON.stringify(1))
+
+    // const getUserPins = async (id) => {
+    //   try {
+    //     const response = await fetch(`http://localhost:3000/pins/${id}`);
+    //     const jsonData = await response.json();
+
+    //     setMap(jsonData);
+    //   }catch (err) {
+    //     console.log(err.message)
+    //   }
+    // }
+
+  //when page is open
+    // useEffect(() => {
+    //   getUserPins(id);
     // }, [])
 
     const onClick = (data)=>{
@@ -63,6 +84,8 @@ const containerStyle = {
           onClick={onClick}
         >
           { map.map((marker, ind) => <Marker key ={ind} position={{lat:marker.lat, lng:marker.lng}}  />) }
+
+          {/* { pins.map((marker, ind) => <Marker key ={ind} position={{lat:marker.lat, lng:marker.lng}}  />) } */}
           <></>
         </GoogleMap>
     ) : <>NOT WORKING</>

@@ -23,6 +23,22 @@ pinController.getAllpins = async (req, res, next) => {
     }
 }
 
+// pinController.getUserPins = async (req, res, next) => {
+//     const queryString = 'SELECT * pins WHERE user_id = $1'
+//     const pins = [];
+//     try {
+//         const { user_id } = req.params
+//         const pins = await db.query(queryString, [user_id])
+
+
+//         for (let i = 0; i < result.rows.length; i++) {
+//             const pin = result.rows[i];
+//             pins.push(pin)
+//         }
+//     }
+    
+// }
+
 
 // pinController.postPin = async (req, res, next) => {
 //     try {
