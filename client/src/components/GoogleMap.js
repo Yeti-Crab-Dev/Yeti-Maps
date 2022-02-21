@@ -39,27 +39,34 @@ const containerStyle = {
     //   setMap(null)
     // }, [])
 
-    // const id = localStorage.setItem('id', JSON.stringify(1))
+    const id = localStorage.getItem("id");
 
-    // const getUserPins = async (id) => {
-    //   try {
-    //     const response = await fetch(`http://localhost:3000/pins/${id}`);
-    //     const jsonData = await response.json();
-
-    //     setMap(jsonData);
-    //   }catch (err) {
-    //     console.log(err.message)
-    //   }
-    // }
+    const getUserPins = async (id) => {
+      console.log('in getUserPins')
+      try {
+        const response = await fetch(`http://localhost:3000/api/pins/${id}`);
+        const jsonData = await response.json();
+       for( let i =0 ;i < jsonData.length ; i++){
+        const lat = jsonData[i].lat;
+        const lng = jsonData[i].long;
+        const pin = {
+          lat: lat,
+          lng : lng
+        }
+        setPins([...pins,pin]);
+       }
+       ;
+      }catch (err) {
+        console.log(err.message)
+      }
+    }
 
   //when page is open
-    // useEffect(() => {
-    //   getUserPins(id);
-    // }, [])
+    useEffect(() => {
+      getUserPins(id);
+    }, [])
 
     const onClick = (data)=>{
-      console.log(data.latLng.lat())
-      console.log(data.latLng.lng())
       localStorage.setItem("lat", JSON.stringify(data.latLng.lat()))
       localStorage.setItem("lng", JSON.stringify(data.latLng.lng()))
       
@@ -73,6 +80,7 @@ const containerStyle = {
       ]);
     }
 
+
   
     return isLoaded ? (
         <GoogleMap
@@ -83,9 +91,11 @@ const containerStyle = {
           // onUnmount={onUnmount}
           onClick={onClick}
         >
+           {/* NOTE: write comments */}
           { map.map((marker, ind) => <Marker key ={ind} position={{lat:marker.lat, lng:marker.lng}}  />) }
 
-          {/* { pins.map((marker, ind) => <Marker key ={ind} position={{lat:marker.lat, lng:marker.lng}}  />) } */}
+          {/* NOTE: all existing pins are loaded */}
+          { pins.map((p, ind) => <Marker key ={ind} position={{lat:p.lat, lng:p.lng}}  />) }
           <></>
         </GoogleMap>
     ) : <>NOT WORKING</>

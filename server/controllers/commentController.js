@@ -1,5 +1,5 @@
 const db = require('../models/dbModel');
-const { response } = require('../server');
+
 
 const commentController = {};
 
@@ -28,12 +28,16 @@ commentController.getAllComments = async (req, res, next) => {
 
 
 commentController.postComment = async (req, res, next) => {
-    const queryString = 'WITH ins1 AS (INSERT INTO comments(comment, city, country, user_id) VALUES ($1, $2, $3, $4) RETURNING comment_id) INSERT INTO pins (lat, long, comment_id, user_id) VALUES ($5, $6, (SELECT comment_id FROM ins1), $4);'
+    // NOTE: $1 = comment, $2 = city, $3 = country, etc.
+    // NOTE: Inserting comment, city, country, and user_id into "comments" table, returning the created comment_id
+    // NOTE: The returned comment_id is used to be inserted into "pins" table as value, together with  lat, long, and user_id
+    const queryString = 'WITH commentInsert AS (INSERT INTO comments(comment, city, country, user_id) VALUES ($1, $2, $3, $4) RETURNING comment_id) INSERT INTO pins (lat, long, comment_id, user_id) VALUES ($5, $6, (SELECT comment_id FROM commentInsert), $4);'
     
     try {
         const {comment, city, country, user_id, lat, lng}  = req.body;
         const params = [comment, city, country, user_id, lat, lng];
         const newComment = await db.query(queryString, params);
+        // NOTE: inserting the created comment as a row in our comment table
         res.locals.comment = newComment.rows[0];
     } catch(err) {
         console.log(err.message)

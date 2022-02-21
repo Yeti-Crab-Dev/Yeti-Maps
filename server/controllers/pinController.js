@@ -23,21 +23,26 @@ pinController.getAllpins = async (req, res, next) => {
     }
 }
 
-// pinController.getUserPins = async (req, res, next) => {
-//     const queryString = 'SELECT * pins WHERE user_id = $1'
-//     const pins = [];
-//     try {
-//         const { user_id } = req.params
-//         const pins = await db.query(queryString, [user_id])
-
-
-//         for (let i = 0; i < result.rows.length; i++) {
-//             const pin = result.rows[i];
-//             pins.push(pin)
-//         }
-//     }
+pinController.getUserPins = async (req, res, next) => {
+    const queryString = 'SELECT * FROM pins WHERE user_id = $1'
+    const pins = [];
+    try {
+        const { id } = req.params;
+        const result = await db.query(queryString, [id])
+        for (let i = 0; i < result.rows.length; i++) {
+            const pin = result.rows[i];
+            pins.push(pin)
+        }
+        res.locals.userpins = pins;
+        next();
+    } catch (err) {
+        return next({
+            log: `pinController.getUserPins: ERROR: ${err}`,
+            message: { err: 'Error occured in pinController.getUserPins. Check server log for more detail'}
+        })
+    }
     
-// }
+}
 
 
 // pinController.postPin = async (req, res, next) => {

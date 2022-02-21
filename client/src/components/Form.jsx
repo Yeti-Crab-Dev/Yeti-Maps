@@ -1,19 +1,22 @@
 import React, { Fragment, useState } from 'react';
 
+
 const Form = () => {
 
     const [city, setCity] = useState('');
     const [country, setCountry] = useState('');
-    const [user_id, setPersonId] = useState(1);
+    const [user_id, setPersonId] = useState(localStorage.getItem("id"));
     const [comment, setComment] = useState('');
 
     let lat;
     let lng;
 
+
     const onSubmitForm = async e => {
         e.preventDefault();
-        lat = Math.floor(localStorage.getItem("lat"));
-        lng = Math.floor(localStorage.getItem("lng"));
+        // NOTE: Refactor to make numbers Math.float() --> currently database only takes in whole numbers
+        lat = (localStorage.getItem("lat"));
+        lng = (localStorage.getItem("lng"));
         console.log(lat, lng);
         try {
             const body = { comment, city, country, user_id, lat, lng };
@@ -25,6 +28,7 @@ const Form = () => {
                 body: JSON.stringify(body)
             })
             console.log('test')
+            window.location = '/'
         } catch (err) {
             console.log(err.message);
         }
@@ -34,7 +38,7 @@ const Form = () => {
         <Fragment>
             <form onSubmit={onSubmitForm}>
                 <div>
-                    <div>{user_id}</div>
+                    <div><h4>Hello, user {user_id}</h4></div>
                     <div>{lat}</div>
                     <div>{lng}</div>
                     <div>
