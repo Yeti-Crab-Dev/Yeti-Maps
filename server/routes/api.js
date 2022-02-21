@@ -6,6 +6,7 @@ const userController = require('../controllers/userController')
 
 const router = express.Router();
 
+
 router.get('/comments',
     commentController.getAllComments,
     (req, res) => {
@@ -32,7 +33,6 @@ router.get('/user/:id', userController.getUser,(req,res)=>{
 router.get('/users', userController.getAllUsers,(req,res)=>{
     return res.status(200).json(res.locals.users);
 });
-
 
 router.post('/comments',
     commentController.postComment,
@@ -63,13 +63,12 @@ router.get('/pins',
     }
 )
 
-
-// router.post('/', 
-//     commentController.postComment, 
-//     (req, res) => {
-//         res.status(200).json(res.locals.comment)
-//     }
-// )
+router.get('/pins/:id',
+    pinController.getUserPins,
+    (req, res) => {
+        res.status(200).json(res.locals.userpins);
+    }
+)
 
 
 module.exports = router;

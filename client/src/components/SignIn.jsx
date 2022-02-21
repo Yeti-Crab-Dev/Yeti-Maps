@@ -9,6 +9,8 @@ const SignIn = (props) => {
     const submitHandler = e => {
         e.preventDefault();
         const body = {username, password};
+        console.log(username)
+        console.log(password)
         axios.post('http://localhost:3000/api/userlogin', body)
         .then(res => {
             console.log(res);
