@@ -37,6 +37,7 @@ router.get('/users', userController.getAllUsers,(req,res)=>{
 router.post('/comments',
     commentController.postComment,
     (req, res) => {
+        console.log('We are comming back')
         res.status(200).json(res.locals.comment)
     }
 )
