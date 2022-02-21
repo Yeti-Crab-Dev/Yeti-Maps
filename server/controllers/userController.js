@@ -28,8 +28,14 @@ userController.getUserWithLogin = async (req,res,next)=>{
         const {username, password} = req.body;
         const query = `SELECT * from users WHERE username = $1 AND password = $2`;
         const response = await db.query(query,[username,password]);
-        if(!response.rows.length) throw new Error ('no user detected');
-        res.locals.user = response.rows[0];
+        res.locals.status = {};
+
+        if(!response.rows.length){
+            res.locals.status.OK = false;
+        } else{
+            res.locals.status.OK = true;
+            res.locals.status.user = response.rows[0];
+        }
         next();
     }
     catch(err){

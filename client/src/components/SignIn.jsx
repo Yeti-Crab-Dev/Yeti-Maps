@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 
-const SignIn = () => {
+const SignIn = (props) => {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -10,7 +10,13 @@ const SignIn = () => {
         e.preventDefault();
         const body = {username, password};
         axios.post('http://localhost:3000/api/userlogin', body)
-        .then(res => console.log(res))
+        .then(res => {
+            console.log(res);
+            if(res.data.OK){
+                localStorage.setItem("id", JSON.stringify(res.data.user.user_id));
+                props.handleLoggedIn();
+			}else console.log('WRONG')
+        })
     }
 
     return (

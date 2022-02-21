@@ -22,7 +22,7 @@ router.post('/updateuser', userController.updateUser,(req,res)=>{
 });
 
 router.post('/userlogin', userController.getUserWithLogin,(req,res)=>{
-    return res.status(200).json(res.locals.user);
+    return res.status(200).json(res.locals.status);
 });
 
 router.get('/user/:id', userController.getUser,(req,res)=>{
