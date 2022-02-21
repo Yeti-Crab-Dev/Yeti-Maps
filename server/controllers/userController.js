@@ -7,14 +7,34 @@ userController.createUser = async (req,res,next)=>{
         const {name, username, password} = req.body;
         const query = 'INSERT INTO users (name,username, password ) VALUES ( $1,$2,$3)';
         const result = await db.query(query,[name,username,password]);
+        const queryGetUser = 'SELECT * FROM users WHERE username = $1';
+        const result2 = await db.query(queryGetUser,[username]);
         console.log('Created ')
         console.log(result)
+        res.locals.id = result2.rows[0].user_id;
         return next();
     }
     catch(err){
         return next({
             log: 'Error in userController.createUser',
             message: 'Cant create user!'
+        });
+    }
+};
+
+userController.getUserWithLogin = async (req,res,next)=>{
+    try{
+        const {username, password} = req.body;
+        const query = `SELECT * from users WHERE username = $1 AND password = $2`;
+        const response = await db.query(query,[username,password]);
+        if(!response.rows.length) throw new Error ('no user detected');
+        res.locals.user = response.rows[0];
+        next();
+    }
+    catch(err){
+        return next({
+            log: 'Error in userController.getUser',
+            message: 'Cant get user!'
         });
     }
 };

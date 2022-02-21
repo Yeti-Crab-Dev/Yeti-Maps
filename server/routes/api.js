@@ -14,11 +14,15 @@ router.get('/',
 );
 
 router.post('/createuser', userController.createUser,(req,res)=>{
-    return res.status(200).json('User created!');
+    return res.status(200).json(res.locals.id);
 });
 
 router.post('/updateuser', userController.updateUser,(req,res)=>{
     return res.status(200).json('User updated!');
+});
+
+router.post('/userlogin', userController.getUserWithLogin,(req,res)=>{
+    return res.status(200).json(res.locals.user);
 });
 
 router.get('/user/:id', userController.getUser,(req,res)=>{
