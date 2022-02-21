@@ -4,6 +4,7 @@ import GoogleMap from './GoogleMap'
 import ShowPost from './ShowPost.jsx'
 import SignIn from './SignIn.jsx';
 import { SignUp } from './SignUp.jsx';
+import { SignOut } from './SignOut.jsx';
 import { hot } from 'react-hot-loader/root';
 
 class App extends React.Component {
@@ -34,7 +35,9 @@ class App extends React.Component {
             <ShowPost /> */}
             {this.state.logged &&  <div><Form />
             <GoogleMap />
-            <ShowPost /> </div>}
+            <ShowPost /> 
+            <SignOut />
+            </div>}
             {!this.state.logged && <div><SignIn handleLoggedIn={this.handleLoggedIn} /> <SignUp /></div>}
         </div>
     )
