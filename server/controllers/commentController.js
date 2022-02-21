@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-const express = require('express');
-
-const commentController = {};
-
-
-// commentController.getAllComments()
-
-
-=======
 const db = require('../models/dbModel');
 const { response } = require('../server');
 
@@ -55,4 +45,3 @@ commentController.postComment = async (req, res, next) => {
 }
 
 module.exports = commentController;
->>>>>>> 5c9b021291022b600985012257c5abe4062807b9

@@ -1,9 +1,21 @@
-import React, {Fragment, useState} from "react";
+import React, {Fragment} from "react";
 
-// const signOut = (props) => {
+const SignOut = () => {
 
-//     buttonClicked
+    const onClick = () => {
+		localStorage.clear();
+        window.location('http://localhost:3000/api/userlogin')
+    }
 
-// }
+    return(
+        <Fragment>
+            <div>
+                <form onSubmit={onClick}>
+                    <button>Logout</button>
+                </form>
+            </div>
+        </Fragment>
+    )
+}
 
-export default SignOut;
+export { SignOut };
