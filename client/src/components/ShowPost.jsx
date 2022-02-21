@@ -1,25 +1,25 @@
 import React, { useState, useEffect } from 'react';
 
 
-const ShowPost = () => {
+const ShowPost = (props) => {
 
-    const [comments, setComments] = useState([]);
-
-
-    useEffect(() => {
-        getAllComment();
-    }, [])
+    // const [comments, setComments] = useState([]);
 
 
-    const getAllComment = async () => {
-        try {
-            const response = await fetch("http://localhost:3000/api/comments");
-            const jsonData = await response.json();
-            setComments(jsonData);
-        } catch (err) {
-            console.log(err.message)
-        }
-    }
+    // useEffect(() => {
+    //     getAllComment();
+    // }, []);
+
+
+    // const getAllComment = async () => {
+    //     try {
+    //         const response = await fetch("http://localhost:3000/api/comments");
+    //         const jsonData = await response.json();
+    //         setComments(jsonData);
+    //     } catch (err) {
+    //         console.log(err.message)
+    //     }
+    // }
   
 
     return (
@@ -27,7 +27,7 @@ const ShowPost = () => {
             <h3>Comments</h3>
             <table>
                 <tbody>
-                    {comments.map(comment =>
+                    {props.comments.map(comment =>
                         <tr key={comment.comment_id}>
                             <td>{comment.city} </td>
                             <td>{comment.country}</td>

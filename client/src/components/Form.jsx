@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from 'react';
 
 
-const Form = () => {
+const Form = (props) => {
 
     const [city, setCity] = useState('');
     const [country, setCountry] = useState('');
@@ -51,7 +51,7 @@ const Form = () => {
                         <input type="text" placeholder="Comment" value = {comment} onChange={e => setComment(e.target.value)}/>
                     </div>
                 </div>
-                <button >Submit</button>
+                <button onClick={props.handleUpdateComments}>Submit</button>
             </form>
         </Fragment>
 
