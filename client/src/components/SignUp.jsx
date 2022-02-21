@@ -1,14 +1,15 @@
 import React, {Fragment, useState} from "react";
 import axios from "axios";
 
-const SignUp = (e) => {
-	e.preventDefault
+const SignUp = () => {
+	
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 
-	const onSubmit = () => {
-		body = { username, password }
-		axios.post('http://localhost3000/api/idk', body)
+	const onSubmit = (e) => {
+		e.preventDefault();
+		const body = { username, password , name:'Tony' };
+		axios.post('http://localhost:3000/api/createuser', body)
 		.then(res => console.log(res));
 	}
 

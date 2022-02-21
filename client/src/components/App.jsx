@@ -3,20 +3,23 @@ import { Form } from './Form.jsx'
 import GoogleMap from './GoogleMap'
 import ShowPost from './ShowPost.jsx'
 import SignIn from './SignIn.jsx';
+import { SignUp } from './SignUp.jsx';
 
 const App = () => {
 
+    //const [isLogged, setLogged] = useState(false); 
+    
     return (
         <div>
-            <h1></h1>
             <SignIn />
+            <SignUp />
             <Form />
             <GoogleMap />
             <ShowPost />
-            {/* {loggedUser &&  <div><Form />
+            {/* {isLogged &&  <div><Form />
             <GoogleMap />
             <ShowPost /> </div>}
-            {!logged && <SignIn />} */}
+            {!isLogged && <SignIn />} */}
         </div>
     )
 

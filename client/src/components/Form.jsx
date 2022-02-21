@@ -12,6 +12,7 @@ const Form = () => {
 
     const onSubmitForm = async e => {
         e.preventDefault();
+        // NOTE: Refactor to make numbers Math.float() --> currently database only takes in whole numbers
         lat = Math.floor(localStorage.getItem("lat"));
         lng = Math.floor(localStorage.getItem("lng"));
         console.log(lat, lng);

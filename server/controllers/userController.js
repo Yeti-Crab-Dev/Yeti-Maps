@@ -3,14 +3,15 @@ const db = require('../models/dbModel');
 const userController = {};
 
 userController.createUser = async (req,res,next)=>{
+    console.log('In create user')
     try{
         const {name, username, password} = req.body;
+        console.log(req.body);
         const query = 'INSERT INTO users (name,username, password ) VALUES ( $1,$2,$3)';
         const result = await db.query(query,[name,username,password]);
         const queryGetUser = 'SELECT * FROM users WHERE username = $1';
         const result2 = await db.query(queryGetUser,[username]);
-        console.log('Created ')
-        console.log(result)
+        console.log(result2.rows[0]);
         res.locals.id = result2.rows[0].user_id;
         return next();
     }
@@ -33,7 +34,7 @@ userController.getUserWithLogin = async (req,res,next)=>{
     }
     catch(err){
         return next({
-            log: 'Error in userController.getUser',
+            log: `Error in userController.getUser : ${err.message}`,
             message: 'Cant get user!'
         });
     }

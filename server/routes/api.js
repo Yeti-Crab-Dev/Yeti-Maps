@@ -33,6 +33,7 @@ router.get('/users', userController.getAllUsers,(req,res)=>{
     return res.status(200).json(res.locals.users);
 });
 
+
 router.post('/comments',
     commentController.postComment,
     (req, res) => {
