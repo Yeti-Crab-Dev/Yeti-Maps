@@ -4,3 +4,14 @@
     float: right;
     margin-right: 320px;
 }
+
+.inputbox {
+    width: 400px;
+}
+
+.form-main {
+    display: flex;
+    justify-content: center;
+}
+
+

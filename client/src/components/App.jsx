@@ -22,6 +22,9 @@ class App extends React.Component {
 
     componentDidMount(){
         this.handleUpdateComments();
+        if(localStorage.getItem("id")!==null){
+            this.setState({logged:!this.state.logged});
+        }
     }
 
     componentDidUpdate(previousProps, previousState){
