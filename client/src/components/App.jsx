@@ -13,9 +13,11 @@ class App extends React.Component {
         this.state = {
             logged: false,
             comments: [],
+            signup: false,
         };
         this.handleLoggedIn = this.handleLoggedIn.bind(this);
         this.handleUpdateComments = this.handleUpdateComments.bind(this);
+        this.signUpTrue = this.signUpTrue.bind(this);
     }
 
     componentDidMount(){
@@ -46,6 +48,9 @@ class App extends React.Component {
         }
     }
 
+    signUpTrue () {
+        this.setState({signup: !this.state.signup})
+    }
     //const [isLogged, setLogged] = useState(false); 
     render() {
         //functions
@@ -61,7 +66,10 @@ class App extends React.Component {
                     <ShowPost comments={this.state.comments}/>
                     <SignOut />
                 </div>}
-                {!this.state.logged && <div><SignIn handleLoggedIn={this.handleLoggedIn} /> <SignUp /></div>}
+                {!this.state.logged && !this.state.signup && <div><SignIn handleLoggedIn={this.handleLoggedIn} /> 
+                <button className='register' onClick={() => this.signUpTrue()}>Register</button></div>}
+                {!this.state.logged && this.state.signup && <div><SignUp handleLoggedIn={this.handleLoggedIn} /></div>}
+
             </div>
         )
     }

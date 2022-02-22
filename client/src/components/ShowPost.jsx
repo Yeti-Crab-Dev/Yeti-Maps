@@ -3,23 +3,23 @@ import React, { useState, useEffect } from 'react';
 
 const ShowPost = (props) => {
 
-    // const [comments, setComments] = useState([]);
+    const [comments, setComments] = useState([]);
 
 
-    // useEffect(() => {
-    //     getAllComment();
-    // }, []);
+    useEffect(() => {
+        getAllComment();
+    }, []);
 
 
-    // const getAllComment = async () => {
-    //     try {
-    //         const response = await fetch("http://localhost:3000/api/comments");
-    //         const jsonData = await response.json();
-    //         setComments(jsonData);
-    //     } catch (err) {
-    //         console.log(err.message)
-    //     }
-    // }
+    const getAllComment = async () => {
+        try {
+            const response = await fetch("http://localhost:3000/api/comments");
+            const jsonData = await response.json();
+            setComments(jsonData);
+        } catch (err) {
+            console.log(err.message)
+        }
+    }
   
 
     return (
