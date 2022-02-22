@@ -10,9 +10,9 @@ const ShowMembers = () => {
     const getAllUser = () => {
         axios.get('http://localhost:3000/api/users')
         .then(result => {
-			setUsers(result.data.map(el => {
+			setUsers(result.data.map((el,ind) => {
 				return (
-					<li>{el.name}</li>
+					<li key={ind}>{el.name}</li>
 				)
 			}))
 		})

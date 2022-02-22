@@ -79,7 +79,9 @@ const ShowPost = (props) => {
 
                             </div>
                             </div>
-                        </tr>
+                        </tr>)}
+                        </tbody>
+                        </table>
             <div>
                 <div className="flex">
                     {props.comments.map(comment =>

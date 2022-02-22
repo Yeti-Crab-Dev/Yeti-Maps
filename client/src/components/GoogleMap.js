@@ -1,6 +1,6 @@
 import { GoogleMap, Marker, useJsApiLoader, InfoWindow } from '@react-google-maps/api';
 import React, { useEffect } from 'react';
-import mapStyles from '/home/tony11567/group-travel-project/Scratch-Project/client/src/components/mapStyles.js';
+import mapStyles from '../components/mapStyles';
 
 
 /// https://maps.googleapis.com/maps/api/geocode/json?latlng=46.49639813020755,-80.99861117865834&key=AIzaSyAjEu5jgZ4h62ka6lKGEx6cGJSX2FxettY
