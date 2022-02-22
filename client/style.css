@@ -14,4 +14,26 @@
     justify-content: center;
 }
 
+.resize {
+    width: 400px;
+    border-radius: 5px;
+    box-shadow: 2px 2px;
 
+}
+
+.resize:hover {
+    background-color: rgb(200, 68, 51);
+}
+
+
+.resize2 {
+    width: 400px;
+    border-radius: 5px;
+    box-shadow: 2px 2px;
+    background-color: rgb(8, 48, 75);
+    color: white;
+}
+
+.resize2:hover {
+    background-color: rgb(17, 78, 119);
+}
