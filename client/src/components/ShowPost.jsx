@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import React, { useState, useEffect, Fragment} from 'react';
 
 
-const ShowPost = () => {
+const ShowPost = (props) => {
 
     const [comments, setComments] = useState([]);
 
     useEffect(() => {
         getAllComment();
-    }, [])
+    }, []);
 
 
     const getAllComment = async () => {
@@ -46,7 +46,8 @@ const ShowPost = () => {
   }
 
     return (
-        <div>
+
+         <div>
             <h3>Comments</h3>
             <table>
                 <tbody>
@@ -79,10 +80,20 @@ const ShowPost = () => {
                             </div>
                             </div>
                         </tr>
+            <div>
+                <div className="flex">
+                    {props.comments.map(comment =>
+                        <div class="card">
+                        <div class="card-body" key={comment.comment_id}>
+                          <h5 class="card-title">{comment.city}, {comment.country}</h5>
+                          <p class="card-text">{comment.comment}</p>
+                          <h6>{comment.users}</h6>
+                        </div>
+                      </div>
                     )}
-                </tbody>
-            </table>
-        </div>
+                </div>
+            </div>
+        </div> 
     )
 }
 

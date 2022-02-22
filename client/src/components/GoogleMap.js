@@ -7,8 +7,8 @@ import mapStyles from '/home/tony11567/group-travel-project/Scratch-Project/clie
 
 
 const containerStyle = {
-    width: '50vw',
-    height: '50vh'
+    width: '100vw',
+    height: '60vh'
   };
   
   const center = {
@@ -17,7 +17,7 @@ const containerStyle = {
   };
 
 
-  function GoogleMapContainer() {
+  function GoogleMapContainer(props) {
     const { isLoaded, loadError } = useJsApiLoader({
       id: 'google-map-script',
       googleMapsApiKey: "AIzaSyAjEu5jgZ4h62ka6lKGEx6cGJSX2FxettY"
@@ -50,10 +50,10 @@ const containerStyle = {
     const id = localStorage.getItem("id");
 
     const getUserPins = async (id) => {
-      console.log('in getUserPins')
       try {
         const response = await fetch(`http://localhost:3000/api/pins/${id}`);
         const jsonData = await response.json();
+        const arrOfPins = [];
        for( let i =0 ;i < jsonData.length ; i++){
         const lat = jsonData[i].lat;
         const lng = jsonData[i].long;
@@ -61,13 +61,16 @@ const containerStyle = {
           lat: lat,
           lng : lng
         }
-        setPins([...pins,pin]);
-       }
+        arrOfPins.push(pin);
+      }
+        setPins([...arrOfPins]);
        ;
       }catch (err) {
         console.log(err.message)
       }
     }
+
+    
 
   //when page is open
     useEffect(() => {
@@ -87,11 +90,6 @@ const containerStyle = {
         }
       ]);
     }
-
-    // var infoWindow = new google.maps.InfoWindow({
-    //   content: 'Hi'
-    // })
-
   
     return isLoaded ? (
         <GoogleMap
@@ -113,14 +111,7 @@ const containerStyle = {
             // }}
           />) }
           {/* NOTE: all existing pins are loaded */}
-          { pins.map((p, ind) => 
-          <Marker 
-          key ={ind} 
-          position={{lat:p.lat, lng:p.lng}}  
-          // onClick={() => {
-          //   setExisting(marker);
-          // }}
-          />) }
+          { pins.map((p, ind) => <Marker key ={ind} position={{lat:p.lat, lng:p.lng}} onClick={(e)=>props.onMarkerClick(e)} />) }
           <></>
 
 
