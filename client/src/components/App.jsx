@@ -77,7 +77,7 @@ class App extends React.Component {
     signUpTrue () {
         this.setState({signup: !this.state.signup})
     }
-    //const [isLogged, setLogged] = useState(false); 
+    //const [isLogged, setLogged] = useState(false);
     render() {
         //functions
         return (
@@ -88,7 +88,7 @@ class App extends React.Component {
                     <GoogleMap onMarkerClick={this.onMarkerClick}/>
                     <ShowPost comments={this.state.comments}/>
                     <ShowMembers />
-                    <SignOut />
+                    <SignOut className='signout'/>
                 </div>}
                 {!this.state.logged && !this.state.signup && <div><SignIn handleLoggedIn={this.handleLoggedIn} /> 
                 <button className='register' onClick={() => this.signUpTrue()}>Register</button></div>}
