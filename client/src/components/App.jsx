@@ -6,6 +6,7 @@ import SignIn from './SignIn.jsx';
 import { SignUp } from './SignUp.jsx';
 import { SignOut } from './SignOut.jsx';
 import { hot } from 'react-hot-loader/root';
+import { ShowMembers } from './ShowMembers.jsx';
 import QRCode from 'qrcode.react';
 import axios from 'axios';
 
@@ -93,6 +94,7 @@ class App extends React.Component {
                 {this.state.logged && <div><Form handleUpdateComments={this.handleUpdateComments} />
                     <GoogleMap onMarkerClick={this.onMarkerClick}/>
                     <ShowPost comments={this.state.comments}/>
+                    <ShowMembers />
                     <SignOut />
                 </div>}
                 {!this.state.logged && !this.state.signup && <div><SignIn handleLoggedIn={this.handleLoggedIn} /> 
