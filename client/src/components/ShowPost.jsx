@@ -37,9 +37,9 @@ const ShowPost = () => {
         
   const upDateComment = async(id) => {
     try {
-        await fetch(`http://localhost:3000/api/comments/${id}`, {
-            method: 'PUT',
-        })
+        // await fetch(`http://localhost:3000/api/comments/${id}`, {
+        //     method: 'PUT',
+        // })
     } catch (error) {
         console.error(error)
     }

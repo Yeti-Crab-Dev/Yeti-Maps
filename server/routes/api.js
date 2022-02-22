@@ -48,6 +48,14 @@ router.get('/comments',
     }
 )
 
+router.delete('/comments/:id',
+    commentController.deleteComment,
+    (req, res) => {
+        res.status(200).json(res.locals.comment)
+    }
+)
+
+
 
 // router.post('/pins',
 //     pinController.postPin,

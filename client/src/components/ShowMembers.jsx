@@ -6,25 +6,19 @@ const ShowMembers = () => {
 
 	const [user, setUsers] = useState([]);
     // iterate
-    
-
 
     const getAllUser = () => {
         axios.get('http://localhost:3000/api/users')
         .then(result => {
-			for (let i = 0; i < result.data.length; i++) {
-				const el = result.data[i];
-				setUsers
-			}
+			setUsers(result.data.map(el => {
+				return (
+					<li>{el.name}</li>
+				)
+			}))
 		})
     }
 
-    console.log(`this is our userNames constant`, user)
-
-    // change userNames into <li> elements
-    // for (let i = 0; i < userNames; i++) {
-
-    // }
+    // console.log(`this is our userNames constant`, user)
 
     getAllUser();
 	
@@ -33,9 +27,7 @@ const ShowMembers = () => {
             <div>
                 <h1>Users</h1>
 				<ul>
-					{user.map(member => {
-                        <li>{member}</li>
-                    })}
+					{user}
 				</ul>
                 
             </div>
