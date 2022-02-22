@@ -49,6 +49,13 @@ router.get('/comments',
     }
 )
 
+router.get('/filteredcomments/:lat/:lng',
+    commentController.getFilteredComments,
+    (req, res) => {
+        res.status(200).json(res.locals.comments)
+    }
+)
+
 
 // router.post('/pins',
 //     pinController.postPin,

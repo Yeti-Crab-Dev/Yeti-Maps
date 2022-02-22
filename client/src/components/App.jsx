@@ -6,6 +6,8 @@ import SignIn from './SignIn.jsx';
 import { SignUp } from './SignUp.jsx';
 import { SignOut } from './SignOut.jsx';
 import { hot } from 'react-hot-loader/root';
+import QRCode from 'qrcode.react';
+import axios from 'axios';
 
 class App extends React.Component {
     constructor(props) {
@@ -16,15 +18,40 @@ class App extends React.Component {
         };
         this.handleLoggedIn = this.handleLoggedIn.bind(this);
         this.handleUpdateComments = this.handleUpdateComments.bind(this);
+        this.onMarkerClick = this.onMarkerClick.bind(this);
     }
 
     componentDidMount(){
+        if(localStorage.getItem("id")!==null){
+            this.setState({logged:!this.state.logged});
+        }
         this.handleUpdateComments();
     }
 
     componentDidUpdate(previousProps, previousState){
+        console.log('Previous State')
+        console.log(previousState)
+        console.log('New State')
+        console.log(this.state.comments)
         if(previousState.comments.length !== this.state.comments.length){
             this.handleUpdateComments();
+        }
+    }
+
+    async onMarkerClick(data){
+        const lat = data.latLng.lat();
+        const lng = data.latLng.lng();
+        try{
+            const resDB = await axios.get(`http://localhost:3000/api/filteredcomments/${lat}/${lng}`);
+            const arrOfFilteredComments = [];
+            console.log(resDB.data)
+            for( let i = 0; i < resDB.data.length; i++){
+                arrOfFilteredComments.push(resDB.data[i]);
+            }
+            this.setState({comments:[...arrOfFilteredComments]});
+            
+        }catch(err){
+            console.log('Error in get filtered pins : ' + err);
         }
     }
 
@@ -34,9 +61,7 @@ class App extends React.Component {
     }
 
     async handleUpdateComments() {
-        console.log('Is it comming here')
         try {
-            console.log('updating comments');
             const response = await fetch("http://localhost:3000/api/comments");
             const jsonData = await response.json();
             this.setState({comments:[...jsonData]});
@@ -48,16 +73,14 @@ class App extends React.Component {
 
     //const [isLogged, setLogged] = useState(false); 
     render() {
+        console.log('Session')
+        console.log(localStorage.getItem("id"))
         //functions
         return (
             <div>
-                {/* <SignIn />
-            <SignUp />
-            <Form />
-            <GoogleMap />
-            <ShowPost /> */}
+                <QRCode value='OMG, how about that ???' />
                 {this.state.logged && <div><Form handleUpdateComments={this.handleUpdateComments} />
-                    <GoogleMap />
+                    <GoogleMap onMarkerClick={this.onMarkerClick}/>
                     <ShowPost comments={this.state.comments}/>
                     <SignOut />
                 </div>}

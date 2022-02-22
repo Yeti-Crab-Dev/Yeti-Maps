@@ -12,19 +12,20 @@ module.exports = {
     },
     module: {
         rules: [
-            { 
-                test: /\.(sa|sc|c)ss$/, 
-                use: ['css-loader', 'style-loader'],
+            {
+                test: /\.css$/i,
+                exclude: /node_modules/,
+                sideEffects: true,
+                use: [
+                    "style-loader",
+                    "css-loader",
+                ],
             },
             { 
                 test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
                 use: ['babel-loader'],
             },
-            { 
-				test: /\.s[ac]ss$/,
-				use: ['sass-loader']
-			},
         ],
     },
     plugins: [
