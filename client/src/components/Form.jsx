@@ -17,11 +17,8 @@ const Form = (props) => {
         // NOTE: Refactor to make numbers Math.float() --> currently database only takes in whole numbers
         lat = (localStorage.getItem("lat"));
         lng = (localStorage.getItem("lng"));
-        console.log(lat, lng);
         try {
-            console.log('test1');
             const body = { comment, city, country, user_id, lat, lng };
-            console.log('test2');
             const response = await fetch("http://localhost:3000/api/comments", {
                 method: "POST",
                 headers: {
@@ -29,9 +26,7 @@ const Form = (props) => {
                 },
                 body: JSON.stringify(body)
             })
-            console.log('test3');
             props.handleUpdateComments();
-            console.log('test4');
         } catch (err) {
             console.log(err.message);
         }
