@@ -7,9 +7,8 @@ import { SignUp } from './SignUp.jsx';
 import { SignOut } from './SignOut.jsx';
 import { hot } from 'react-hot-loader/root';
 import { ShowMembers } from './ShowMembers.jsx';
-import QRCode from 'qrcode.react';
 import axios from 'axios';
-
+import QRCodeComponent from './QRCode.jsx';
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -38,10 +37,6 @@ class App extends React.Component {
     }
 
     componentDidUpdate(previousProps, previousState){
-        console.log('Previous State')
-        console.log(previousState)
-        console.log('New State')
-        console.log(this.state.comments)
         if(previousState.comments.length !== this.state.comments.length){
             this.handleUpdateComments();
         }
@@ -53,7 +48,6 @@ class App extends React.Component {
         try{
             const resDB = await axios.get(`http://localhost:3000/api/filteredcomments/${lat}/${lng}`);
             const arrOfFilteredComments = [];
-            console.log(resDB.data)
             for( let i = 0; i < resDB.data.length; i++){
                 arrOfFilteredComments.push(resDB.data[i]);
             }
@@ -83,19 +77,18 @@ class App extends React.Component {
     signUpTrue () {
         this.setState({signup: !this.state.signup})
     }
-    //const [isLogged, setLogged] = useState(false); 
+    //const [isLogged, setLogged] = useState(false);
     render() {
-        console.log('Session')
-        console.log(localStorage.getItem("id"))
         //functions
         return (
             <div>
-                <QRCode value='OMG, how about that ???' />
-                {this.state.logged && <div><Form handleUpdateComments={this.handleUpdateComments} />
+                {this.state.logged && <div>
+                    <QRCodeComponent userID = {localStorage.getItem("id")} />
+                    <Form handleUpdateComments={this.handleUpdateComments} />
                     <GoogleMap onMarkerClick={this.onMarkerClick}/>
                     <ShowPost comments={this.state.comments}/>
                     <ShowMembers />
-                    <SignOut />
+                    <SignOut className='signout'/>
                 </div>}
                 {!this.state.logged && !this.state.signup && <div><SignIn handleLoggedIn={this.handleLoggedIn} /> 
                 <button className='register' onClick={() => this.signUpTrue()}>Register</button></div>}

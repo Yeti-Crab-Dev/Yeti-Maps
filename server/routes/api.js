@@ -42,6 +42,13 @@ router.post('/comments',
     }
 )
 
+router.post('/comments/:id',
+    commentController.updateComment,
+    (req, res) => {
+        res.status(200).json(res.locals.comment)
+    }
+)
+
 router.get('/comments',
     commentController.getAllComments,
     (req, res) => {
@@ -57,12 +64,12 @@ router.delete('/comments/:id',
 )
 
 
-router.get('/filteredcomments/:lat/:lng',
-    commentController.getFilteredComments,
-    (req, res) => {
-        res.status(200).json(res.locals.comments)
-    }
-)
+// router.get('/filteredcomments/:lat/:lng',
+//     commentController.getFilteredComments,
+//     (req, res) => {
+//         res.status(200).json(res.locals.comments)
+//     }
+// )
 
 
 // router.post('/pins',

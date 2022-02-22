@@ -11,7 +11,7 @@ const SignOut = () => {
         <Fragment>
             <div>
                 <form onSubmit={onClick}>
-                    <button>Logout</button>
+                    <button type="button" class="btn btn-primary">Logout</button>
                 </form>
             </div>
         </Fragment>

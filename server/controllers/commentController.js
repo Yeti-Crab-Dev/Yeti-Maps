@@ -24,6 +24,28 @@ commentController.getAllComments = async (req, res, next) => {
 
 };
 
+commentController.updateComment = async (req, res, next) => {
+    //select the column with the matching ID and change the comment 
+    console.log('supppp')
+    const { id } = req.params;
+    const upDatedComment = req.body.modal;
+    console.log('comment:', upDatedComment)
+    const queryString =  `UPDATE comments SET comment=$1 WHERE comment_id=$2`
+
+    db.query(queryString, [upDatedComment, id], (err, result) => {
+        if (err){
+            console.log('error in commentController.updatecomment')
+            next({
+                log: `commentController.updateComment: ERROR: ${err}`,
+                message: { err: 'Error occured in commentController.updateComment. Check server log for more detail'}
+            });
+        }
+        res.locals.comment = 'Updated'
+        next();
+    })
+}
+
+
 commentController.deleteComment = (req, res, next) => {
   
     const { id } = req.params;
@@ -69,21 +91,21 @@ commentController.postComment = async (req, res, next) => {
     }
 }
 
-commentController.getFilteredComments = async (req, res, next) => {
-    const query = 'SELECT pins.comment_id FROM pins WHERE lat = $1 AND long = $2';
-    const query2 = 'SELECT * FROM comments WHERE comment_id = $1';
-    try {
-        const { lat, lng } = req.params;
-        const result = await db.query(query, [lat, lng]);
-        res.locals.comments = [];
-        for (let i = 0; i < result.rows.length; i++) {
-            const comment = await db.query(query2,[result.rows[i].comment_id]);
-            res.locals.comments.push(comment.rows[0]);
-        }
-        next();
-    } catch (err) {
-        console.log(err.message)
-    }
-}
+// commentController.getFilteredComments = async (req, res, next) => {
+//     const query = 'SELECT pins.comment_id FROM pins WHERE lat = $1 AND long = $2';
+//     const query2 = 'SELECT * FROM comments WHERE comment_id = $1';
+//     try {
+//         const { lat, lng } = req.params;
+//         const result = await db.query(query, [lat, lng]);
+//         res.locals.comments = [];
+//         for (let i = 0; i < result.rows.length; i++) {
+//             const comment = await db.query(query2,[result.rows[i].comment_id]);
+//             res.locals.comments.push(comment.rows[0]);
+//         }
+//         next();
+//     } catch (err) {
+//         console.log(err.message)
+//     }
+// }
 
 module.exports = commentController;
