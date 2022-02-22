@@ -6,8 +6,8 @@ import React, { useEffect } from 'react';
 
 
 const containerStyle = {
-    width: '50vw',
-    height: '50vh'
+    width: '100vw',
+    height: '60vh'
   };
   
   const center = {
