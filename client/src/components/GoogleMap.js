@@ -20,7 +20,7 @@ const containerStyle = {
   function GoogleMapContainer(props) {
     const { isLoaded, loadError } = useJsApiLoader({
       id: 'google-map-script',
-      googleMapsApiKey: "AIzaSyAjEu5jgZ4h62ka6lKGEx6cGJSX2FxettY"
+      googleMapsApiKey: "AIzaSyBTgyIZKK8vmKdPcrB-TRRDAV1T8IRPav4"
     })
 
     if(loadError) return <div>SHIIIIITTT</div>;

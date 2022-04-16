@@ -4,10 +4,10 @@
   "description": "Scratch Project by Michelle, Dee, Tony, Yurii, and Leonoor",
   "main": "index.js",
   "scripts": {
-    "LFGGG": "concurrently \"NODE_ENV=development webpack serve --open\" \"nodemon ./server/server.js\"",
+    "dev": "concurrently \"NODE_ENV=development webpack serve --open\" \"nodemon ./server/server.js\"",
     "start": "webpack server --hot --mode development ",
     "build": "webpack",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -28,13 +28,15 @@
     "cors": "^2.8.5",
     "express": "^4.17.3",
     "html-webpack-plugin": "^5.5.0",
+    "jest": "^27.5.1",
     "pg": "^8.7.3",
     "prop-types": "^15.8.1",
     "qrcode": "^1.5.0",
     "qrcode.react": "^1.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-hot-loader": "^4.13.0"
+    "react-hot-loader": "^4.13.0",
+    "supertest": "^6.2.2"
   },
   "devDependencies": {
     "@babel/core": "^7.17.5",
@@ -43,6 +45,7 @@
     "@babel/preset-react": "^7.16.7",
     "babel-loader": "^8.2.3",
     "css-loader": "^6.6.0",
+    "eslint": "^8.13.0",
     "nodemon": "^2.0.15",
     "style-loader": "^3.3.1",
     "webpack": "^5.69.1",

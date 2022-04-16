@@ -49,12 +49,6 @@ router.post('/comments/:id',
     }
 )
 
-router.get('/comments',
-    commentController.getAllComments,
-    (req, res) => {
-        res.status(200).json(res.locals.comments)
-    }
-)
 
 router.delete('/comments/:id',
     commentController.deleteComment,
