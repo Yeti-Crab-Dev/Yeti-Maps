@@ -53,6 +53,7 @@ const containerStyle = {
       try {
         const response = await fetch(`http://localhost:3000/api/pins/${id}`);
         const jsonData = await response.json();
+
         const arrOfPins = [];
        for( let i =0 ;i < jsonData.length ; i++){
         const lat = jsonData[i].lat;
@@ -63,6 +64,8 @@ const containerStyle = {
         }
         arrOfPins.push(pin);
       }
+      console.log(' get pins')
+      console.log(arrOfPins)
         setPins([...arrOfPins]);
        ;
       }catch (err) {
@@ -111,7 +114,7 @@ const containerStyle = {
             // }}
           />) }
           {/* NOTE: all existing pins are loaded */}
-          { pins.map((p, ind) => <Marker key ={ind} position={{lat:p.lat, lng:p.lng}} onClick={(e)=>props.onMarkerClick(e)} />) }
+          { pins.map((p, ind) => <Marker key ={ind} position={{lat:Number(p.lat), lng:Number(p.lng)}} onClick={(e)=>props.onMarkerClick(e)} />) }
           <></>
 
 
